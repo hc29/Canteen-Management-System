@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>CMS</title>
+
+	{% include 'snippets/header.html' %}		
+</head>
+
+<body style="background-color: powderblue;">
+
+	<style type="text/css">
+		.main{
+			min-height: 100vh;
+			height: 95%;
+		}
+	</style>
+	<div class="main">
+		{% block content %}
+
+		{% endblock content %}
+	</div>
+
+
+	{% include 'snippets/footer.html' %}
+</body>
+
+</html>

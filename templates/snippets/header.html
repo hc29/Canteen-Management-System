@@ -1,0 +1,76 @@
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+<style type="text/css">
+body {
+  min-height: 75rem;
+  padding-top: 4.5rem;
+}
+</style>
+
+<nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: navy">
+  <a class="navbar-brand" href="#">
+  	{% if user.is_authenticated %}
+  	{% if user.user_type == "customer" %}
+  		<h3>{{user.username}},(Foodie)</h3>
+  	{% elif user.user_type == "owner" %}
+  		<h3>{{user.username}},(Owner)</h3>
+  	{% endif %}
+  	{% else %}
+  		<h3>CMS</h3>
+  	{% endif %}
+  </a>
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+  	{% if request.user.is_authenticated %}
+	    <ul class="navbar-nav mr-auto">
+	      <li class="nav-item active">
+	        <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+	      </li>
+	      {% if request.user.user_type == "customer" %}
+		      <li class="nav-item active">
+		        <a class="nav-link" href="{% url 'order:order_summary' %}">My Cart<span class="sr-only">(current)</span></a>
+		      </li>
+		      <li class="nav-item active">
+		        <a class="nav-link" href="{% url 'order:order_placed' %}">My Order<span class="sr-only">(current)</span></a>
+		      </li>
+	      {% endif %}
+	      {% if request.user.user_type == "owner" %}
+		      <li class="nav-item active">
+		        <a class="nav-link" href="{% url 'my_items' %}">My Items<span class="sr-only">(current)</span></a>
+		      </li>
+		      <li class="nav-item active">
+		        <a class="nav-link" href="{% url 'order:received_orders' %}">Received Orders<span class="sr-only">(current)</span></a>
+		      </li>
+	      {% endif %}
+	    </ul>
+	    <ul class="navbar-nav ml-auto">
+	      <li class="nav-item active">
+	        <a class="nav-link" href="{% url 'account' %}">Account <span class="sr-only">(current)</span></a>
+	      </li>
+	      <li class="nav-item active">
+	        <a class="nav-link" href="{% url 'logout' %}">Logout <span class="sr-only">(current)</span></a>
+	      </li>
+	    </ul>
+  	{% else %}
+  		<ul class="navbar-nav mr-auto">
+	      <li class="nav-item active">
+	        <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+	      </li>
+	    </ul>
+	    <ul class="navbar-nav ml-auto">
+	      <li class="nav-item active">
+	        <a class="nav-link" href="{% url 'login' %}">Login <span class="sr-only">(current)</span></a>
+	      </li>
+	      <li class="nav-item active">
+	        <a class="nav-link" href="{% url 'register' %}">Register <span class="sr-only">(current)</span></a>
+	      </li>
+	    </ul>
+  	{% endif %}
+  </div>
+  	}
+</nav>
